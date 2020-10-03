@@ -1,0 +1,51 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ChatteringFoolsRecorder"
+             xmlns:local1="clr-namespace:ChatteringFoolsRecorder.AudioCapture" x:Class="ChatteringFoolsRecorder.AudioCapture.AudioCaptureView"
+             mc:Ignorable="d" 
+             d:DesignHeight="362" Width="563.502">
+    <Grid Margin="0,0,0,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="186*"/>
+            <ColumnDefinition Width="377*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0*"/>
+            <RowDefinition Height="0*"/>
+            <RowDefinition Height="100
+                           *"/>
+            <RowDefinition Height="142*"/>
+        </Grid.RowDefinitions>
+        <ComboBox Name="devicesSelection" Margin="72,31,0,0" Grid.Row="2" ItemsSource="{Binding CaptureDevices}" SelectionChanged="OnCbObjectsSelectionChanged" HorizontalAlignment="Left" Width="294" Height="32" VerticalAlignment="Top" Grid.Column="2">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox IsChecked="{Binding IsSelected}" Width="20" VerticalAlignment="Center" Checked="OnCbObjectCheckBoxChecked" Unchecked="OnCbObjectCheckBoxChecked" />
+                        <TextBlock Text="{Binding ObjectData}" VerticalAlignment="Center" />
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <TextBlock HorizontalAlignment="Left" Margin="82,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="94" Grid.Row="1" Grid.Column="2" Grid.RowSpan="2"><Run Text="Capture Device"/><Run Text="s"/></TextBlock>
+        <ComboBox HorizontalAlignment="Left" Margin="118,47,0,0" Grid.Row="2" SelectedIndex="{Binding SampleTypeIndex, Mode=TwoWay}" VerticalAlignment="Top" Width="120" Height="22" Grid.ColumnSpan="2" Grid.Column="1">
+            <TextBlock><Run Text="IEEE Float"/></TextBlock>
+            <TextBlock><Run Text="PCM"/></TextBlock>
+        </ComboBox>
+        <ComboBox HorizontalAlignment="Left" Margin="118.312,13,0,0" Grid.Row="1" SelectedIndex="{Binding ShareModeIndex, Mode=TwoWay}" VerticalAlignment="Top" Width="120" Height="22" Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Column="1">
+            <TextBlock><Run Text="Shared"/></TextBlock>
+            <TextBlock><Run Text="Exclusive"/></TextBlock>
+        </ComboBox>
+        <Button Content="Record" Command="{Binding RecordCommand}" HorizontalAlignment="Left" Margin="11.312,90,0,0" Grid.Row="2" VerticalAlignment="Top" Width="75" Height="22" Grid.Column="1"/>
+        <Button Content="Stop" Command="{Binding StopCommand}" HorizontalAlignment="Left" Margin="91.312,90,0,0" Grid.Row="2" VerticalAlignment="Top" Width="75" Height="22" Grid.Column="1"/>
+        <Label Content="{Binding Message}" HorizontalAlignment="Left" Margin="55,90,0,0" Grid.Row="2" VerticalAlignment="Top" Height="31" Width="311" Grid.Column="2"/>
+        <TextBlock HorizontalAlignment="Left" Margin="9,47,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Sample Type" VerticalAlignment="Top" Height="16" Width="68" Grid.Column="1"/>
+
+        <local1:RecordingsView DataContext="{Binding RecordingsViewModel}" Margin="5.312,6,6,6" Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="1" />
+        <TextBlock HorizontalAlignment="Left" Margin="10,14,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Share Mode" VerticalAlignment="Top" Height="16" Width="66" Grid.Column="1"/>
+
+    </Grid>
+</UserControl>
